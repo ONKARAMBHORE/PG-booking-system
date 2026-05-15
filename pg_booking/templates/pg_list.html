@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">Available PGs</h1>
+
+<form method="GET" class="mb-4">
+
+    <div class="row">
+
+        <div class="col-md-10">
+
+            <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search PG by city or name">
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button class="btn btn-primary w-100">
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<div class="row">
+
+{% for pg in pgs %}
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card h-100">
+
+            {% if pg.image %}
+                <img
+                src="{{ pg.image.url }}"
+                class="card-img-top"
+                height="250">
+            {% else %}
+                <p>No Image Available</p>
+            {% endif %}
+
+            <div class="card-body">
+
+                <h4>{{ pg.name }}</h4>
+
+                <p><strong>City:</strong> {{ pg.city }}</p>
+
+                <p><strong>Rent:</strong> ₹{{ pg.rent }}</p>
+
+                <a
+                href="/pg/{{ pg.id }}/"
+                class="btn btn-primary">
+
+                    View Details
+
+                </a>
+
+                {% if request.user == pg.owner %}
+
+                    <a
+                    href="/update-pg/{{ pg.id }}/"
+                    class="btn btn-warning">
+
+                        Update
+
+                    </a>
+
+                    <a
+                    href="/delete-pg/{{ pg.id }}/"
+                    class="btn btn-danger">
+
+                        Delete
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

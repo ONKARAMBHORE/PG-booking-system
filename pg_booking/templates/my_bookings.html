@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Bookings</title>
+</head>
+<body>
+
+    <h1>My Bookings</h1>
+
+    {% for booking in bookings %}
+
+        <div style="border:1px solid black; margin:10px; padding:10px;">
+
+            <h2>{{ booking.pg.name }}</h2>
+
+            <p>City: {{ booking.pg.city }}</p>
+
+            <p>Rent: {{ booking.pg.rent }}</p>
+
+            <p>status: {{ booking.status }}</p>
+
+            <p>Date: {{ booking.booking_date }}</p>
+
+        </div>
+
+
+    {% endfor %}
+</body>
+</html>
+
+

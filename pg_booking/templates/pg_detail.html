@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <img
+    src="{{ pg.image.url }}"
+    height="400"
+    class="card-img-top">
+
+    <div class="card-body">
+
+        <h1>{{ pg.name }}</h1>
+
+        <p><strong>City:</strong> {{ pg.city }}</p>
+
+        <p><strong>Rent:</strong> ₹{{ pg.rent }}</p>
+
+        <p>{{ pg.description }}</p>
+
+        <a
+        href="/add_review/{{ pg.id }}/"
+        class="btn btn-warning">
+
+        Add Review
+
+        </a>
+
+        <hr>
+
+<h3>Reviews</h3>
+
+{% for review in pg.review_set.all %}
+
+    <div class="card p-3 mb-2">
+
+        <h5>{{ review.user.username }}</h5>
+
+        <p>Rating: ⭐ {{ review.rating }}/5</p>
+
+        <p>{{ review.comment }}</p>
+
+    </div>
+
+{% empty %}
+
+    <p>No reviews yet.</p>
+
+{% endfor %}
+
+        <a
+        href="/book/{{ pg.id }}/"
+        class="btn btn-success">
+
+            Book Now
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
